@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.2.2 (Python 3.11.0 on win32)" generated="2025-06-08T01:45:28.650875" rpa="false" schemaversion="5">
+<suite id="s1" name="ApiTests" source="C:\automation\demo\RobotFramework\MAIN\Tests\ApiTests.robot">
+<test id="s1-t1" name="Create/Register User Account" line="25">
+<kw name="Generate New User API Data" owner="TestData">
+<kw name="Generate Random String" owner="String">
+<msg time="2025-06-08T01:45:30.716303" level="INFO">${rand} = 6Vc8snpuAv</msg>
+<var>${rand}</var>
+<arg>10</arg>
+<doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
+<status status="PASS" start="2025-06-08T01:45:30.715270" elapsed="0.001033"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-06-08T01:45:30.717354" level="INFO">${user} = {'name': '6Vc8snpuAv QA', 'email': '6Vc8snpuAv@pwqavl.com', 'password': 'SecureP@ss123', 'title': 'Mr', 'birth_date': '18', 'birth_month': '1', 'birth_year': '1989', 'firstname': 'LV', 'lastname': 'QA...</msg>
+<var>${user}</var>
+<arg>name=${rand} QA</arg>
+<arg>email=${rand}@pwqavl.com</arg>
+<arg>password=SecureP@ss123</arg>
+<arg>title=Mr</arg>
+<arg>birth_date=18</arg>
+<arg>birth_month=1</arg>
+<arg>birth_year=1989</arg>
+<arg>firstname=LV</arg>
+<arg>lastname=QA</arg>
+<arg>company=Test Co</arg>
+<arg>address1=QA Street 11</arg>
+<arg>address2=</arg>
+<arg>country=United States</arg>
+<arg>zipcode=M5H2N2</arg>
+<arg>state=UT</arg>
+<arg>city=QACity</arg>
+<arg>mobile_number=1234567890</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-06-08T01:45:30.716303" elapsed="0.001051"/>
+</kw>
+<return>
+<value>${user}</value>
+<status status="PASS" start="2025-06-08T01:45:30.717354" elapsed="0.000000"/>
+</return>
+<msg time="2025-06-08T01:45:30.717354" level="INFO">${user} = {'name': '6Vc8snpuAv QA', 'email': '6Vc8snpuAv@pwqavl.com', 'password': 'SecureP@ss123', 'title': 'Mr', 'birth_date': '18', 'birth_month': '1', 'birth_year': '1989', 'firstname': 'LV', 'lastname': 'QA...</msg>
+<var>${user}</var>
+<status status="PASS" start="2025-06-08T01:45:30.714098" elapsed="0.003256"/>
+</kw>
+<kw name="API - Create User Account" owner="ApiHelpers">
+<kw name="Send API Request" owner="ApiHelpers">
+<kw name="Disable SSL Warnings" owner="ApiHelpers">
+<kw name="Evaluate" owner="BuiltIn">
+<arg>__import__('urllib3').disable_warnings(__import__('urllib3').exceptions.InsecureRequestWarning)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-06-08T01:45:30.720676" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-06-08T01:45:30.719643" elapsed="0.001033"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-06-08T01:45:30.720676" level="INFO">Creating Session using : alias=mysession, url=https://www.automationexercise.com/api/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>mysession</arg>
+<arg>${API_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-06-08T01:45:30.720676" elapsed="0.001046"/>
+</kw>
+<if>
+<branch type="IF" condition="'${method}' == 'GET'">
+<kw name="GET On Session" owner="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${endpoint}</arg>
+<arg>params=${params}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" start="2025-06-08T01:45:30.721722" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-06-08T01:45:30.721722" elapsed="0.000000"/>
+</branch>
+<branch type="ELSE IF" condition="'${method}' == 'POST'">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-06-08T01:45:31.898705" level="INFO">POST Request : url=https://www.automationexercise.com/api/createAccount 
+ path_url=/api/createAccount 
+ headers={'Content-Length': '282', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=name=6Vc8snpuAv+QA&amp;email=6Vc8snpuAv%40pwqavl.com&amp;password=SecureP%40ss123&amp;title=Mr&amp;birth_date=18&amp;birth_month=1&amp;birth_year=1989&amp;firstname=LV&amp;lastname=QA&amp;company=Test+Co&amp;address1=QA+Street+11&amp;address2=&amp;country=United+States&amp;zipcode=M5H2N2&amp;state=UT&amp;city=QACity&amp;mobile_number=1234567890 
+ </msg>
+<msg time="2025-06-08T01:45:31.898705" level="INFO">POST Response : url=https://www.automationexercise.com/api/createAccount 
+ status=200, reason=OK 
+ headers={'Date': 'Sat, 07 Jun 2025 22:45:31 GMT', 'Content-Type': 'text/html; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Vary': 'Accept,Cookie,Accept-Encoding', 'Referrer-Policy': 'same-origin', 'X-Frame-Options': 'DENY', 'X-Content-Type-Options': 'nosniff', 'Allow': 'OPTIONS, POST', 'X-Powered-By': 'Phusion Passenger(R) 6.0.23', 'Status': '200 OK', 'Report-To': '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=4H8Hi2euVE7ryO88IMRQ6BKmnNZfoomJz7FfmfxdyA740G1sbDUVUHS6Hik%2Ba%2F73OqDTdHALcyQsR8Hy1DyYB57KcY0wcSZmx822bwog8K%2BPldMqABulwg%3D%3D"}]}', 'Server': 'cloudflare', 'Cf-Cache-Status': 'DYNAMIC', 'Nel': '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}', 'CF-RAY': '94c3ae255c75c9c8-OTP', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body={"responseCode": 201, "message": "User created!"} 
+ </msg>
+<msg time="2025-06-08T01:45:31.898705" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${endpoint}</arg>
+<arg>params=${params}</arg>
+<arg>data=${data}</arg>
+<arg>json=${json}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-06-08T01:45:30.721722" elapsed="1.176983"/>
+</kw>
+<status status="PASS" start="2025-06-08T01:45:30.721722" elapsed="1.176983"/>
+</branch>
+<branch type="ELSE IF" condition="'${method}' == 'PUT'">
+<kw name="PUT On Session" owner="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${endpoint}</arg>
+<arg>data=${data}</arg>
+<arg>json=${json}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a PUT request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" start="2025-06-08T01:45:31.900155" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-06-08T01:45:31.898705" elapsed="0.001450"/>
+</branch>
+<branch type="ELSE IF" condition="'${method}' == 'DELETE'">
+<kw name="DELETE On Session" owner="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${endpoint}</arg>
+<arg>params=${params}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
+<status status="NOT RUN" start="2025-06-08T01:45:31.900155" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-06-08T01:45:31.900155" elapsed="0.000000"/>
+</branch>
+<branch type="ELSE">
+<kw name="Fail" owner="BuiltIn">
+<arg>Unsupported HTTP method: ${method}</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" start="2025-06-08T01:45:31.900155" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-06-08T01:45:31.900155" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-06-08T01:45:30.721722" elapsed="1.178433"/>
+</if>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-06-08T01:45:31.900155" elapsed="0.000000"/>
+</return>
+<msg time="2025-06-08T01:45:31.901216" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>method=POST</arg>
+<arg>endpoint=createAccount</arg>
+<arg>data=${user}</arg>
+<status status="PASS" start="2025-06-08T01:45:30.718587" elapsed="1.182629"/>
+</kw>
+<kw name="Convert String to JSON" owner="RPA.JSON">
+<msg time="2025-06-08T01:45:31.901216" level="INFO">${json} = {'responseCode': 201, 'message': 'User created!'}</msg>
+<var>${json}</var>
+<arg>${response.text}</arg>
+<doc>Convert a string to a JSON serializable object and return it.</doc>
+<status status="PASS" start="2025-06-08T01:45:31.901216" elapsed="0.000000"/>
+</kw>
+<return>
+<value>${response}</value>
+<value>${json}</value>
+<status status="PASS" start="2025-06-08T01:45:31.901216" elapsed="0.001356"/>
+</return>
+<msg time="2025-06-08T01:45:31.902572" level="INFO">${res} = &lt;Response [200]&gt;</msg>
+<msg time="2025-06-08T01:45:31.902572" level="INFO">${json} = {'responseCode': 201, 'message': 'User created!'}</msg>
+<var>${res}</var>
+<var>${json}</var>
+<arg>${user}</arg>
+<status status="PASS" start="2025-06-08T01:45:30.717354" elapsed="1.185218"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-06-08T01:45:31.903098" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${json['responseCode']}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-06-08T01:45:31.902572" elapsed="0.000526"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${json['message']}</arg>
+<arg>User created!</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-06-08T01:45:31.903098" elapsed="0.001043"/>
+</kw>
+<kw name="Clear API Responses Directory" owner="ApiHelpers" type="TEARDOWN">
+<kw name="Empty Directory" owner="OperatingSystem">
+<msg time="2025-06-08T01:45:31.905198" level="INFO" html="true">Listing contents of directory '&lt;a href="file://C:\automation\demo\RobotFramework\MAIN\API\api_responses"&gt;C:\automation\demo\RobotFramework\MAIN\API\api_responses&lt;/a&gt;'.</msg>
+<msg time="2025-06-08T01:45:31.905198" level="INFO" html="true">Emptied directory '&lt;a href="file://C:\automation\demo\RobotFramework\MAIN\API\api_responses"&gt;C:\automation\demo\RobotFramework\MAIN\API\api_responses&lt;/a&gt;'.</msg>
+<arg>C:\\automation\\demo\\RobotFramework\\MAIN\\API/api_responses</arg>
+<doc>Deletes all the content from the given directory.</doc>
+<status status="PASS" start="2025-06-08T01:45:31.905198" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-06-08T01:45:31.904141" elapsed="0.001057"/>
+</kw>
+<tag>Critical</tag>
+<status status="PASS" start="2025-06-08T01:45:30.713238" elapsed="1.191960"/>
+</test>
+<status status="PASS" start="2025-06-08T01:45:28.652905" elapsed="3.253323"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">Critical</stat>
+</tag>
+<suite>
+<stat name="ApiTests" id="s1" pass="1" fail="0" skip="0">ApiTests</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
