@@ -1,0 +1,4 @@
+robotframework==6.1.1
+robotframework-zoomba==3.2.0
+robotframework-requests==0.9.7
+rpaframework==28.4.0
