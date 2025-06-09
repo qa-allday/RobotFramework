@@ -1,7 +1,6 @@
 cython
 pyyaml==6.0.1
 robotframework
-robotframework-seleniumlibrary
 robotframework-zoomba
 robotframework-requests
 jsonschema
