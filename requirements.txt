@@ -4,4 +4,3 @@ robotframework
 robotframework-zoomba
 robotframework-requests
 robotframework-jsonlibrary
-selenium
