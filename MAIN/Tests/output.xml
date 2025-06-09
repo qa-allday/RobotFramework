@@ -1,195 +1,422 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.2.2 (Python 3.11.0 on win32)" generated="2025-06-08T23:41:23.808618" rpa="false" schemaversion="5">
-<suite id="s1" name="ApiTests" source="C:\automation\demo\RobotFramework\MAIN\Tests\ApiTests.robot">
-<test id="s1-t1" name="Create/Register User Account" line="25">
-<kw name="Generate New User API Data" owner="TestData">
-<kw name="Generate Random String" owner="String">
-<msg time="2025-06-08T23:41:33.316515" level="INFO">${rand} = eGsRR4h5jr</msg>
-<var>${rand}</var>
-<arg>10</arg>
-<doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
-<status status="PASS" start="2025-06-08T23:41:33.316515" elapsed="0.000000"/>
-</kw>
-<kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-06-08T23:41:33.317798" level="INFO">${user} = {'name': 'eGsRR4h5jr QA', 'email': 'eGsRR4h5jr@pwqavl.com', 'password': 'SecureP@ss123', 'title': 'Mr', 'birth_date': '18', 'birth_month': '1', 'birth_year': '1989', 'firstname': 'LV', 'lastname': 'QA...</msg>
-<var>${user}</var>
-<arg>name=${rand} QA</arg>
-<arg>email=${rand}@pwqavl.com</arg>
-<arg>password=SecureP@ss123</arg>
-<arg>title=Mr</arg>
-<arg>birth_date=18</arg>
-<arg>birth_month=1</arg>
-<arg>birth_year=1989</arg>
-<arg>firstname=LV</arg>
-<arg>lastname=QA</arg>
-<arg>company=Test Co</arg>
-<arg>address1=QA Street 11</arg>
-<arg>address2=</arg>
-<arg>country=United States</arg>
-<arg>zipcode=M5H2N2</arg>
-<arg>state=UT</arg>
-<arg>city=QACity</arg>
-<arg>mobile_number=1234567890</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-06-08T23:41:33.316515" elapsed="0.001283"/>
-</kw>
-<return>
-<value>${user}</value>
-<status status="PASS" start="2025-06-08T23:41:33.317798" elapsed="0.000000"/>
-</return>
-<msg time="2025-06-08T23:41:33.318843" level="INFO">${user} = {'name': 'eGsRR4h5jr QA', 'email': 'eGsRR4h5jr@pwqavl.com', 'password': 'SecureP@ss123', 'title': 'Mr', 'birth_date': '18', 'birth_month': '1', 'birth_year': '1989', 'firstname': 'LV', 'lastname': 'QA...</msg>
-<var>${user}</var>
-<status status="PASS" start="2025-06-08T23:41:33.314917" elapsed="0.003926"/>
-</kw>
-<kw name="API - Create User Account" owner="ApiHelpers">
-<kw name="Send API Request" owner="ApiHelpers">
-<kw name="Disable SSL Warnings" owner="ApiHelpers">
-<kw name="Evaluate" owner="BuiltIn">
-<arg>__import__('urllib3').disable_warnings(__import__('urllib3').exceptions.InsecureRequestWarning)</arg>
-<doc>Evaluates the given expression in Python and returns the result.</doc>
-<status status="PASS" start="2025-06-08T23:41:33.321966" elapsed="0.000000"/>
-</kw>
-<status status="PASS" start="2025-06-08T23:41:33.321966" elapsed="0.000000"/>
-</kw>
-<kw name="Create Session" owner="RequestsLibrary">
-<msg time="2025-06-08T23:41:33.323030" level="INFO">Creating Session using : alias=mysession, url=https://www.automationexercise.com/api/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<arg>mysession</arg>
-<arg>${API_URL}</arg>
-<doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2025-06-08T23:41:33.323030" elapsed="0.000000"/>
-</kw>
+<robot generator="Robot 7.2.2 (Python 3.11.0 on win32)" generated="2025-06-09T10:06:41.962430" rpa="false" schemaversion="5">
+<suite id="s1" name="LoginSignUpTests" source="C:\automation\demo\RobotFramework\MAIN\Tests\LoginSignUpTests.robot">
+<test id="s1-t1" name="Login with Valid Credentials and Logout" line="8">
+<kw name="Run Keywords" owner="BuiltIn" type="SETUP">
+<kw name="Begin Web Test" owner="GeneralKeywords">
 <if>
-<branch type="IF" condition="'${method}' == 'GET'">
-<kw name="GET On Session" owner="RequestsLibrary">
-<var>${response}</var>
-<arg>mysession</arg>
-<arg>${endpoint}</arg>
-<arg>params=${params}</arg>
-<arg>headers=${headers}</arg>
-<doc>Sends a GET request on a previously created HTTP Session.</doc>
-<status status="NOT RUN" start="2025-06-08T23:41:33.324104" elapsed="0.000000"/>
+<branch type="IF" condition="'${METHOD}' == '${EMPTY}'">
+<kw name="Set Selenium Timeout" owner="Zoomba.GUILibrary">
+<arg>${timeout}</arg>
+<doc>Sets the timeout that is used by various keywords.</doc>
+<status status="PASS" start="2025-06-09T10:06:46.239570" elapsed="0.000000"/>
 </kw>
-<status status="NOT RUN" start="2025-06-08T23:41:33.323030" elapsed="0.001074"/>
-</branch>
-<branch type="ELSE IF" condition="'${method}' == 'POST'">
-<kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2025-06-08T23:41:36.578323" level="INFO">POST Request : url=https://www.automationexercise.com/api/createAccount 
- path_url=/api/createAccount 
- headers={'Content-Length': '282', 'Content-Type': 'application/x-www-form-urlencoded'} 
- body=name=eGsRR4h5jr+QA&amp;email=eGsRR4h5jr%40pwqavl.com&amp;password=SecureP%40ss123&amp;title=Mr&amp;birth_date=18&amp;birth_month=1&amp;birth_year=1989&amp;firstname=LV&amp;lastname=QA&amp;company=Test+Co&amp;address1=QA+Street+11&amp;address2=&amp;country=United+States&amp;zipcode=M5H2N2&amp;state=UT&amp;city=QACity&amp;mobile_number=1234567890 
- </msg>
-<msg time="2025-06-08T23:41:36.578323" level="INFO">POST Response : url=https://www.automationexercise.com/api/createAccount 
- status=200, reason=OK 
- headers={'Date': 'Sun, 08 Jun 2025 20:41:33 GMT', 'Content-Type': 'text/html; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Vary': 'Accept,Cookie,Accept-Encoding', 'Referrer-Policy': 'same-origin', 'X-Frame-Options': 'DENY', 'X-Content-Type-Options': 'nosniff', 'Allow': 'POST, OPTIONS', 'X-Powered-By': 'Phusion Passenger(R) 6.0.23', 'Status': '200 OK', 'Report-To': '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=6Wuq6ptvCtVGT%2FkiEK7jAHFpAp508VkkCS5B6sAwL4rf8mIB%2BtFgUuHJO8U4d2HDFKVnnGHr0day0is3qJrxvMMExJvj5T5nm65cCxZ%2FgzhyfwGKR5NuCw%3D%3D"}]}', 'Server': 'cloudflare', 'Cf-Cache-Status': 'DYNAMIC', 'Nel': '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}', 'CF-RAY': '94cb35ea7ce8c9d9-OTP', 'alt-svc': 'h3=":443"; ma=86400'} 
- body={"responseCode": 201, "message": "User created!"} 
- </msg>
-<msg time="2025-06-08T23:41:36.578830" level="INFO">${response} = &lt;Response [200]&gt;</msg>
-<var>${response}</var>
-<arg>mysession</arg>
-<arg>${endpoint}</arg>
-<arg>params=${params}</arg>
-<arg>data=${data}</arg>
-<arg>json=${json}</arg>
-<arg>headers=${headers}</arg>
-<doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-06-08T23:41:33.324104" elapsed="3.254726"/>
+<kw name="Set Selenium Speed" owner="Zoomba.GUILibrary">
+<arg>${seleniumTimeout}</arg>
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<status status="PASS" start="2025-06-09T10:06:46.239570" elapsed="0.001010"/>
 </kw>
-<status status="PASS" start="2025-06-08T23:41:33.324104" elapsed="3.254726"/>
-</branch>
-<branch type="ELSE IF" condition="'${method}' == 'PUT'">
-<kw name="PUT On Session" owner="RequestsLibrary">
-<var>${response}</var>
-<arg>mysession</arg>
-<arg>${endpoint}</arg>
-<arg>data=${data}</arg>
-<arg>json=${json}</arg>
-<arg>headers=${headers}</arg>
-<doc>Sends a PUT request on a previously created HTTP Session.</doc>
-<status status="NOT RUN" start="2025-06-08T23:41:36.578830" elapsed="0.000000"/>
+<kw name="Open Browser" owner="Zoomba.GUILibrary">
+<msg time="2025-06-09T10:06:46.240580" level="INFO">Opening browser 'chrome' to base url 'https://www.automationexercise.com/'.</msg>
+<arg>${WEB_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-06-09T10:06:46.240580" elapsed="6.547580"/>
 </kw>
-<status status="NOT RUN" start="2025-06-08T23:41:36.578830" elapsed="0.000000"/>
-</branch>
-<branch type="ELSE IF" condition="'${method}' == 'DELETE'">
-<kw name="DELETE On Session" owner="RequestsLibrary">
-<var>${response}</var>
-<arg>mysession</arg>
-<arg>${endpoint}</arg>
-<arg>params=${params}</arg>
-<arg>headers=${headers}</arg>
-<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
-<status status="NOT RUN" start="2025-06-08T23:41:36.578830" elapsed="0.000000"/>
+<kw name="Maximize Browser Window" owner="Zoomba.GUILibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-06-09T10:06:52.788666" elapsed="0.182844"/>
 </kw>
-<status status="NOT RUN" start="2025-06-08T23:41:36.578830" elapsed="0.001296"/>
+<status status="PASS" start="2025-06-09T10:06:46.237129" elapsed="6.734381"/>
 </branch>
 <branch type="ELSE">
-<kw name="Fail" owner="BuiltIn">
-<arg>Unsupported HTTP method: ${method}</arg>
-<doc>Fails the test with the given message and optionally alters its tags.</doc>
-<status status="NOT RUN" start="2025-06-08T23:41:36.580126" elapsed="0.000000"/>
+<kw name="Evaluate" owner="BuiltIn">
+<var>${chrome_options}</var>
+<arg>sys.modules['selenium.webdriver'].ChromeOptions()</arg>
+<arg>sys, selenium.webdriver</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-06-09T10:06:52.972026" elapsed="0.000000"/>
 </kw>
-<status status="NOT RUN" start="2025-06-08T23:41:36.580126" elapsed="0.000000"/>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${headless_arg}</var>
+<arg>headless=new</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2025-06-09T10:06:52.972539" elapsed="0.000000"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${winsize}</var>
+<arg>window-size=1920,1080</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2025-06-09T10:06:52.972539" elapsed="0.000000"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${proxy-list}</var>
+<arg>proxy-bypass-list=*</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2025-06-09T10:06:52.972539" elapsed="0.000000"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${proxy-server}</var>
+<arg>proxy-server='direct://'</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2025-06-09T10:06:52.972539" elapsed="0.000000"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<arg>${chrome_options}</arg>
+<arg>add_argument</arg>
+<arg>--${winsize}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="NOT RUN" start="2025-06-09T10:06:52.972539" elapsed="0.000000"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<arg>${chrome_options}</arg>
+<arg>add_argument</arg>
+<arg>--${headless_arg}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="NOT RUN" start="2025-06-09T10:06:52.973590" elapsed="0.000000"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<arg>${chrome_options}</arg>
+<arg>add_argument</arg>
+<arg>--ignore-certificate-errors</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="NOT RUN" start="2025-06-09T10:06:52.973590" elapsed="0.000000"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<arg>${chrome_options}</arg>
+<arg>add_argument</arg>
+<arg>--disable-gpu</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="NOT RUN" start="2025-06-09T10:06:52.973590" elapsed="0.000000"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<arg>${chrome_options}</arg>
+<arg>add_argument</arg>
+<arg>--allow-running-insecure-content</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="NOT RUN" start="2025-06-09T10:06:52.973590" elapsed="0.000000"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<arg>${chrome_options}</arg>
+<arg>add_argument</arg>
+<arg>--start-maximized</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="NOT RUN" start="2025-06-09T10:06:52.973590" elapsed="0.000000"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<arg>${chrome_options}</arg>
+<arg>add_argument</arg>
+<arg>--${proxy-list}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="NOT RUN" start="2025-06-09T10:06:52.974593" elapsed="0.000000"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<arg>${chrome_options}</arg>
+<arg>add_argument</arg>
+<arg>--disable-dev-shm-usage</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="NOT RUN" start="2025-06-09T10:06:52.974593" elapsed="0.000000"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<arg>${chrome_options}</arg>
+<arg>add_argument</arg>
+<arg>--no-sandbox</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="NOT RUN" start="2025-06-09T10:06:52.974593" elapsed="0.000000"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<arg>${chrome_options}</arg>
+<arg>add_argument</arg>
+<arg>--disable-extensions</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="NOT RUN" start="2025-06-09T10:06:52.974593" elapsed="0.000000"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<arg>${chrome_options}</arg>
+<arg>add_argument</arg>
+<arg>--${proxy-server}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="NOT RUN" start="2025-06-09T10:06:52.974593" elapsed="0.000000"/>
+</kw>
+<kw name="Create Webdriver" owner="Zoomba.GUILibrary">
+<arg>Chrome</arg>
+<arg>options=${chrome_options}</arg>
+<doc>Creates an instance of Selenium WebDriver.</doc>
+<status status="NOT RUN" start="2025-06-09T10:06:52.975594" elapsed="0.000000"/>
+</kw>
+<kw name="Set Selenium Timeout" owner="Zoomba.GUILibrary">
+<arg>${timeout}</arg>
+<doc>Sets the timeout that is used by various keywords.</doc>
+<status status="NOT RUN" start="2025-06-09T10:06:52.975594" elapsed="0.000000"/>
+</kw>
+<kw name="Set Selenium Speed" owner="Zoomba.GUILibrary">
+<arg>${seleniumTimeout}</arg>
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<status status="NOT RUN" start="2025-06-09T10:06:52.975594" elapsed="0.000000"/>
+</kw>
+<kw name="Go To" owner="Zoomba.GUILibrary">
+<arg>${WEB_URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="NOT RUN" start="2025-06-09T10:06:52.975594" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-06-09T10:06:52.971510" elapsed="0.004084"/>
 </branch>
-<status status="PASS" start="2025-06-08T23:41:33.323030" elapsed="3.257096"/>
+<status status="PASS" start="2025-06-09T10:06:46.237129" elapsed="6.738465"/>
 </if>
-<return>
-<value>${response}</value>
-<status status="PASS" start="2025-06-08T23:41:36.580126" elapsed="0.000000"/>
-</return>
-<msg time="2025-06-08T23:41:36.580126" level="INFO">${response} = &lt;Response [200]&gt;</msg>
-<var>${response}</var>
-<arg>method=POST</arg>
-<arg>endpoint=createAccount</arg>
-<arg>data=${user}</arg>
-<status status="PASS" start="2025-06-08T23:41:33.318843" elapsed="3.261283"/>
+<kw name="Register Keyword To Run On Failure" owner="Zoomba.GUILibrary">
+<msg time="2025-06-09T10:06:52.976596" level="INFO">Save Selenium Screenshot will be run on failure.</msg>
+<arg>Save Selenium Screenshot</arg>
+<doc>Sets the keyword to execute, when a SeleniumLibrary keyword fails.</doc>
+<status status="PASS" start="2025-06-09T10:06:52.975594" elapsed="0.001002"/>
 </kw>
-<kw name="Convert String to JSON" owner="RPA.JSON">
-<msg time="2025-06-08T23:41:36.581127" level="INFO">${json} = {'responseCode': 201, 'message': 'User created!'}</msg>
-<var>${json}</var>
-<arg>${response.text}</arg>
-<doc>Convert a string to a JSON serializable object and return it.</doc>
-<status status="PASS" start="2025-06-08T23:41:36.581127" elapsed="0.001295"/>
+<status status="PASS" start="2025-06-09T10:06:46.237129" elapsed="6.739467"/>
 </kw>
-<return>
-<value>${response}</value>
-<value>${json}</value>
-<status status="PASS" start="2025-06-08T23:41:36.582422" elapsed="0.000000"/>
-</return>
-<msg time="2025-06-08T23:41:36.582422" level="INFO">${res} = &lt;Response [200]&gt;</msg>
-<msg time="2025-06-08T23:41:36.582422" level="INFO">${json} = {'responseCode': 201, 'message': 'User created!'}</msg>
-<var>${res}</var>
-<var>${json}</var>
-<arg>${user}</arg>
-<status status="PASS" start="2025-06-08T23:41:33.318843" elapsed="3.263579"/>
+<kw name="Wait For And Click Element" owner="Zoomba.GUILibrary">
+<kw name="Set Focus To Element" owner="Zoomba.GUILibrary">
+<arg>//*[contains(@class,'navbar')]//*[contains(text(),'Signup')]</arg>
+<doc>Sets the focus to the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-06-09T10:06:53.439403" elapsed="0.223971"/>
 </kw>
-<kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2025-06-08T23:41:36.583443" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;class 'str'&gt;</msg>
-<arg>${json['responseCode']}</arg>
-<arg>201</arg>
-<doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2025-06-08T23:41:36.582422" elapsed="0.001021"/>
+<msg time="2025-06-09T10:06:53.663374" level="INFO">Clicking element '//*[contains(@class,'navbar')]//*[contains(text(),'Signup')]'.</msg>
+<arg>${signup_login_menu_icon}</arg>
+<doc>This is a series of chained Selenium keywords, that tries to find a web element first, and then clicks it.
+If the element fails to be clicked, it will scroll to the bottom of the page and try again.</doc>
+<status status="PASS" start="2025-06-09T10:06:52.976596" elapsed="1.598656"/>
 </kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<arg>${json['message']}</arg>
-<arg>User created!</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="PASS" start="2025-06-08T23:41:36.583443" elapsed="0.001008"/>
+<arg>Begin Web Test</arg>
+<arg>AND</arg>
+<arg>Wait For And Click Element</arg>
+<arg>${signup_login_menu_icon}</arg>
+<doc>Executes all the given keywords in a sequence.</doc>
+<status status="PASS" start="2025-06-09T10:06:46.235610" elapsed="8.339642"/>
 </kw>
-<kw name="Clear API Responses Directory" owner="ApiHelpers" type="TEARDOWN">
-<kw name="Empty Directory" owner="OperatingSystem">
-<msg time="2025-06-08T23:41:36.585790" level="INFO" html="true">Listing contents of directory '&lt;a href="file://C:\automation\demo\RobotFramework\MAIN\API\api_responses"&gt;C:\automation\demo\RobotFramework\MAIN\API\api_responses&lt;/a&gt;'.</msg>
-<msg time="2025-06-08T23:41:36.585790" level="INFO" html="true">Emptied directory '&lt;a href="file://C:\automation\demo\RobotFramework\MAIN\API\api_responses"&gt;C:\automation\demo\RobotFramework\MAIN\API\api_responses&lt;/a&gt;'.</msg>
-<arg>C:\\automation\\demo\\RobotFramework\\MAIN\\API/api_responses</arg>
-<doc>Deletes all the content from the given directory.</doc>
-<status status="PASS" start="2025-06-08T23:41:36.585790" elapsed="0.000000"/>
+<kw name="Login To Application" owner="SignUpLoginPage">
+<kw name="Input Text Surely" owner="WebHelpers">
+<for flavor="IN RANGE">
+<iter>
+<if>
+<branch type="IF" condition="'${clear}' != '${EMPTY}'">
+<kw name="Clear Field" owner="WebHelpers">
+<arg>${locator}</arg>
+<status status="NOT RUN" start="2025-06-09T10:06:54.579274" elapsed="0.000000"/>
 </kw>
-<status status="PASS" start="2025-06-08T23:41:36.584451" elapsed="0.001339"/>
+<status status="NOT RUN" start="2025-06-09T10:06:54.578272" elapsed="0.001002"/>
+</branch>
+<status status="PASS" start="2025-06-09T10:06:54.578272" elapsed="0.001002"/>
+</if>
+<kw name="Wait For And Input Text" owner="Zoomba.GUILibrary">
+<kw name="Set Focus To Element" owner="Zoomba.GUILibrary">
+<arg>css:input[data-qa='login-email']</arg>
+<doc>Sets the focus to the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-06-09T10:06:55.044726" elapsed="0.220239"/>
+</kw>
+<msg time="2025-06-09T10:06:55.264965" level="INFO">Typing text 'lvqa@testlv.qa.com' into text field 'css:input[data-qa='login-email']'.</msg>
+<arg>${locator}</arg>
+<arg>${text}</arg>
+<doc>This is a series of chained Selenium keywords, that tries to find a web element first, and then input text.
+If the element fails to typed into, it will scroll to the bottom of the page and try again.</doc>
+<status status="PASS" start="2025-06-09T10:06:54.579274" elapsed="1.091074"/>
+</kw>
+<kw name="Get Text" owner="Zoomba.GUILibrary">
+<msg time="2025-06-09T10:06:55.891819" level="INFO">${enteredText} = </msg>
+<var>${enteredText}</var>
+<arg>${locator}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-06-09T10:06:55.670348" elapsed="0.221471"/>
+</kw>
+<kw name="Get Value" owner="Zoomba.GUILibrary">
+<msg time="2025-06-09T10:06:56.114071" level="INFO">${enteredValue} = lvqa@testlv.qa.com</msg>
+<var>${enteredValue}</var>
+<arg>${locator}</arg>
+<doc>Returns the value attribute of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-06-09T10:06:55.892335" elapsed="0.221736"/>
+</kw>
+<if>
+<branch type="IF" condition="'${enteredText}' != '${EMPTY}'">
+<if>
+<branch type="IF" condition="'${enteredText}' == '${text}'">
+<break>
+<status status="NOT RUN" start="2025-06-09T10:06:56.114071" elapsed="0.000000"/>
+</break>
+<status status="NOT RUN" start="2025-06-09T10:06:56.114071" elapsed="0.000000"/>
+</branch>
+<status status="NOT RUN" start="2025-06-09T10:06:56.114071" elapsed="0.001575"/>
+</if>
+<status status="NOT RUN" start="2025-06-09T10:06:56.114071" elapsed="0.001575"/>
+</branch>
+<branch type="ELSE">
+<if>
+<branch type="IF" condition="'${enteredValue}' == '${text}'">
+<break>
+<status status="PASS" start="2025-06-09T10:06:56.115646" elapsed="0.000000"/>
+</break>
+<status status="PASS" start="2025-06-09T10:06:56.115646" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-06-09T10:06:56.115646" elapsed="0.000000"/>
+</if>
+<status status="PASS" start="2025-06-09T10:06:56.115646" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-06-09T10:06:56.114071" elapsed="0.001575"/>
+</if>
+<var name="${i}">0</var>
+<status status="PASS" start="2025-06-09T10:06:54.578272" elapsed="1.537374"/>
+</iter>
+<var>${i}</var>
+<value>9999</value>
+<status status="PASS" start="2025-06-09T10:06:54.577269" elapsed="1.538377"/>
+</for>
+<arg>${login_email_input}</arg>
+<arg>${email}</arg>
+<status status="PASS" start="2025-06-09T10:06:54.576269" elapsed="1.539377"/>
+</kw>
+<kw name="Input Text Surely" owner="WebHelpers">
+<for flavor="IN RANGE">
+<iter>
+<if>
+<branch type="IF" condition="'${clear}' != '${EMPTY}'">
+<kw name="Clear Field" owner="WebHelpers">
+<arg>${locator}</arg>
+<status status="NOT RUN" start="2025-06-09T10:06:56.119813" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-06-09T10:06:56.118808" elapsed="0.001005"/>
+</branch>
+<status status="PASS" start="2025-06-09T10:06:56.118808" elapsed="0.001005"/>
+</if>
+<kw name="Wait For And Input Text" owner="Zoomba.GUILibrary">
+<kw name="Set Focus To Element" owner="Zoomba.GUILibrary">
+<arg>css:input[data-qa='login-password']</arg>
+<doc>Sets the focus to the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-06-09T10:06:56.448482" elapsed="0.221692"/>
+</kw>
+<msg time="2025-06-09T10:06:56.670174" level="INFO">Typing text 'qweqwe' into text field 'css:input[data-qa='login-password']'.</msg>
+<arg>${locator}</arg>
+<arg>${text}</arg>
+<doc>This is a series of chained Selenium keywords, that tries to find a web element first, and then input text.
+If the element fails to typed into, it will scroll to the bottom of the page and try again.</doc>
+<status status="PASS" start="2025-06-09T10:06:56.119813" elapsed="0.960838"/>
+</kw>
+<kw name="Get Text" owner="Zoomba.GUILibrary">
+<msg time="2025-06-09T10:06:57.299082" level="INFO">${enteredText} = </msg>
+<var>${enteredText}</var>
+<arg>${locator}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-06-09T10:06:57.080651" elapsed="0.218431"/>
+</kw>
+<kw name="Get Value" owner="Zoomba.GUILibrary">
+<msg time="2025-06-09T10:06:57.520150" level="INFO">${enteredValue} = qweqwe</msg>
+<var>${enteredValue}</var>
+<arg>${locator}</arg>
+<doc>Returns the value attribute of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-06-09T10:06:57.299082" elapsed="0.221068"/>
+</kw>
+<if>
+<branch type="IF" condition="'${enteredText}' != '${EMPTY}'">
+<if>
+<branch type="IF" condition="'${enteredText}' == '${text}'">
+<break>
+<status status="NOT RUN" start="2025-06-09T10:06:57.522209" elapsed="0.000509"/>
+</break>
+<status status="NOT RUN" start="2025-06-09T10:06:57.522209" elapsed="0.000509"/>
+</branch>
+<status status="NOT RUN" start="2025-06-09T10:06:57.522209" elapsed="0.000509"/>
+</if>
+<status status="NOT RUN" start="2025-06-09T10:06:57.520150" elapsed="0.002568"/>
+</branch>
+<branch type="ELSE">
+<if>
+<branch type="IF" condition="'${enteredValue}' == '${text}'">
+<break>
+<status status="PASS" start="2025-06-09T10:06:57.522718" elapsed="0.000000"/>
+</break>
+<status status="PASS" start="2025-06-09T10:06:57.522718" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-06-09T10:06:57.522718" elapsed="0.000000"/>
+</if>
+<status status="PASS" start="2025-06-09T10:06:57.522718" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-06-09T10:06:57.520150" elapsed="0.002568"/>
+</if>
+<var name="${i}">0</var>
+<status status="PASS" start="2025-06-09T10:06:56.118808" elapsed="1.403910"/>
+</iter>
+<var>${i}</var>
+<value>9999</value>
+<status status="PASS" start="2025-06-09T10:06:56.117196" elapsed="1.405522"/>
+</for>
+<arg>${login_password_input}</arg>
+<arg>${password}</arg>
+<status status="PASS" start="2025-06-09T10:06:56.115646" elapsed="1.408150"/>
+</kw>
+<kw name="Wait For And Click Element" owner="Zoomba.GUILibrary">
+<kw name="Set Focus To Element" owner="Zoomba.GUILibrary">
+<arg>css:button[data-qa='login-button']</arg>
+<doc>Sets the focus to the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-06-09T10:06:57.854461" elapsed="0.218867"/>
+</kw>
+<msg time="2025-06-09T10:06:58.073839" level="INFO">Clicking element 'css:button[data-qa='login-button']'.</msg>
+<arg>${login_btn}</arg>
+<doc>This is a series of chained Selenium keywords, that tries to find a web element first, and then clicks it.
+If the element fails to be clicked, it will scroll to the bottom of the page and try again.</doc>
+<status status="PASS" start="2025-06-09T10:06:57.523796" elapsed="3.151033"/>
+</kw>
+<arg>${login_tester}</arg>
+<arg>${password}</arg>
+<status status="PASS" start="2025-06-09T10:06:54.575252" elapsed="6.099577"/>
+</kw>
+<kw name="Wait Until Page Contains Element" owner="Zoomba.GUILibrary">
+<arg>${delete_account_menu_icon}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2025-06-09T10:07:00.675830" elapsed="0.136924"/>
+</kw>
+<kw name="Wait For And Click Element" owner="Zoomba.GUILibrary">
+<kw name="Set Focus To Element" owner="Zoomba.GUILibrary">
+<arg>//*[contains(@class,'navbar')]//*[contains(text(),'Logout')]</arg>
+<doc>Sets the focus to the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-06-09T10:07:01.148194" elapsed="0.217527"/>
+</kw>
+<msg time="2025-06-09T10:07:01.365721" level="INFO">Clicking element '//*[contains(@class,'navbar')]//*[contains(text(),'Logout')]'.</msg>
+<arg>${logout_menu_icon}</arg>
+<doc>This is a series of chained Selenium keywords, that tries to find a web element first, and then clicks it.
+If the element fails to be clicked, it will scroll to the bottom of the page and try again.</doc>
+<status status="PASS" start="2025-06-09T10:07:00.812754" elapsed="1.777872"/>
+</kw>
+<kw name="Page Should Have URL Matching" owner="WebHelpers">
+<kw name="Get Location" owner="Zoomba.GUILibrary">
+<msg time="2025-06-09T10:07:02.752637" level="INFO">${url} = https://www.automationexercise.com/login</msg>
+<var>${url}</var>
+<doc>Returns the current browser window URL.</doc>
+<status status="PASS" start="2025-06-09T10:07:02.590626" elapsed="0.162011"/>
+</kw>
+<kw name="Should Match Regexp" owner="BuiltIn">
+<arg>${url}</arg>
+<arg>${pattern}</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="PASS" start="2025-06-09T10:07:02.753159" elapsed="0.000000"/>
+</kw>
+<arg>.*login</arg>
+<status status="PASS" start="2025-06-09T10:07:02.590626" elapsed="0.162533"/>
+</kw>
+<kw name="Wait Until Page Contains Element" owner="Zoomba.GUILibrary">
+<arg>${signup_login_menu_icon}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2025-06-09T10:07:02.753159" elapsed="0.110859"/>
+</kw>
+<kw name="Wait Until Page Contains Element" owner="Zoomba.GUILibrary">
+<arg>${login_email_input}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2025-06-09T10:07:02.864018" elapsed="0.109708"/>
+</kw>
+<kw name="End Web Test" owner="GeneralKeywords" type="TEARDOWN">
+<kw name="Close Browser" owner="Zoomba.GUILibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-06-09T10:07:02.974772" elapsed="2.363036"/>
+</kw>
+<status status="PASS" start="2025-06-09T10:07:02.974772" elapsed="2.363036"/>
 </kw>
 <tag>Critical</tag>
-<status status="PASS" start="2025-06-08T23:41:33.313810" elapsed="3.271980"/>
+<status status="PASS" start="2025-06-09T10:06:46.234610" elapsed="19.103198"/>
 </test>
-<status status="PASS" start="2025-06-08T23:41:23.811682" elapsed="12.775126"/>
+<status status="PASS" start="2025-06-09T10:06:41.963442" elapsed="23.375627"/>
 </suite>
 <statistics>
 <total>
@@ -199,7 +426,7 @@
 <stat pass="1" fail="0" skip="0">Critical</stat>
 </tag>
 <suite>
-<stat name="ApiTests" id="s1" pass="1" fail="0" skip="0">ApiTests</stat>
+<stat name="LoginSignUpTests" id="s1" pass="1" fail="0" skip="0">LoginSignUpTests</stat>
 </suite>
 </statistics>
 <errors>
