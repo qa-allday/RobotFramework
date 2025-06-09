@@ -21,8 +21,3 @@ Add Products To Cart
     Add Products To Cart    ${products_list}
     Wait For And Click Element    ${cart_menu_icon}
     Verify Product Rows    ${products_list}
-    
-Testsqfq
-    [Setup]
-    ${string}=    Generate Random String    10
-    log to console    \n rand:${string}

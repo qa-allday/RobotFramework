@@ -18,7 +18,7 @@ Begin Web Test
     ELSE
         Set Selenium Timeout    ${timeout}
         Set Selenium Speed    ${seleniumTimeout}
-        Open Browser    ${WEB_URL}    ${HEADLESS}
+        Open Browser    ${WEB_URL}    ${HEADLESS}    options=add_argument("wi--window-size=1920,1080")
     END
     Register Keyword To Run On Failure    Save Selenium Screenshot
 
